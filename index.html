@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Full Solar System Loader</title>
+  <style>
+    :root{
+      --bg: #070617;
+      --orbit: rgba(255,255,255,0.06);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:radial-gradient(ellipse at center,#0b1230 0%,var(--bg) 70%);display:flex;align-items:center;justify-content:center;color:#fff;font-family:Inter,system-ui}
+
+    .solar-wrap{width:500px;height:500px;position:relative;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+
+    .sun{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:90px;height:90px;border-radius:50%;
+      background:radial-gradient(circle at 30% 25%,#fff39a 0%,#ffd24a 18%,#ff9f1c 60%,#ff6b00 100%);
+      box-shadow:0 0 40px 12px rgba(255,160,40,0.2),0 0 160px 32px rgba(255,120,20,0.12);
+      animation:sunPulse 6s linear infinite;
+    }
+
+    @keyframes sunPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.05)}}
+
+    .orbit{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      border-radius:50%;border:1px solid var(--orbit);
+    }
+
+    .planet{position:absolute;left:50%;top:50%;transform-origin:center;}
+    .planet .dot{border-radius:50%;}
+
+    /* Mercury */
+    .orbit.mercury{width:110px;height:110px;animation:rotateMerc 4s linear infinite;transform:translate(-50%,-50%) rotate(25deg);}
+    .orbit.mercury .planet{transform:translateX(55px);} 
+    .orbit.mercury .dot{width:6px;height:6px;background:#b7b7b7;}
+
+    /* Venus */
+    .orbit.venus{width:150px;height:150px;animation:rotateVen 7s linear infinite;transform:translate(-50%,-50%) rotate(120deg);}
+    .orbit.venus .planet{transform:translateX(75px);} 
+    .orbit.venus .dot{width:9px;height:9px;background:#e0b07a;}
+
+    /* Earth */
+    .orbit.earth{width:200px;height:200px;animation:rotateEarth 10s linear infinite;transform:translate(-50%,-50%) rotate(200deg);}
+    .orbit.earth .planet{transform:translateX(100px);} 
+    .orbit.earth .dot{width:12px;height:12px;background:linear-gradient(180deg,#3a86ff,#0f4cff);position:relative;}
+    .orbit.earth .moon{position:absolute;left:0;top:0;transform:translate(20px,-6px);width:5px;height:5px;border-radius:50%;background:#dcdcdc;animation:moonOrbit 1.5s linear infinite;}
+
+    /* Mars */
+    .orbit.mars{width:250px;height:250px;animation:rotateMars 15s linear infinite;transform:translate(-50%,-50%) rotate(45deg);}
+    .orbit.mars .planet{transform:translateX(125px);} 
+    .orbit.mars .dot{width:10px;height:10px;background:#ff6b4a;}
+
+    /* Jupiter */
+    .orbit.jupiter{width:310px;height:310px;animation:rotateJup 22s linear infinite;transform:translate(-50%,-50%) rotate(280deg);}
+    .orbit.jupiter .planet{transform:translateX(155px);} 
+    .orbit.jupiter .dot{width:20px;height:20px;background:linear-gradient(90deg,#d9a066,#b86f2c);}
+
+    /* Saturn */
+    .orbit.saturn{width:370px;height:370px;animation:rotateSat 30s linear infinite;transform:translate(-50%,-50%) rotate(150deg);}
+    .orbit.saturn .planet{transform:translateX(185px);} 
+    .orbit.saturn .dot{width:18px;height:18px;background:#e7d1a8;position:relative;}
+    .orbit.saturn .dot::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotateX(64deg);width:34px;height:6px;border-radius:50%;background:rgba(200,170,100,0.85);}
+
+    /* Uranus */
+    .orbit.uranus{width:420px;height:420px;animation:rotateUranus 40s linear infinite;transform:translate(-50%,-50%) rotate(310deg);}
+    .orbit.uranus .planet{transform:translateX(210px);} 
+    .orbit.uranus .dot{width:14px;height:14px;background:#91d7e0;}
+
+    /* Neptune */
+    .orbit.neptune{width:470px;height:470px;animation:rotateNeptune 50s linear infinite;transform:translate(-50%,-50%) rotate(75deg);}
+    .orbit.neptune .planet{transform:translateX(235px);} 
+    .orbit.neptune .dot{width:14px;height:14px;background:#4961ff;}
+
+    /* Pluto */
+    .orbit.pluto{width:520px;height:520px;animation:rotatePluto 60s linear infinite;transform:translate(-50%,-50%) rotate(190deg);}
+    .orbit.pluto .planet{transform:translateX(260px);} 
+    .orbit.pluto .dot{width:6px;height:6px;background:#aaa;}
+
+    @keyframes rotateMerc{from{transform:translate(-50%,-50%) rotate(25deg);}to{transform:translate(-50%,-50%) rotate(385deg);}}
+    @keyframes rotateVen{from{transform:translate(-50%,-50%) rotate(120deg);}to{transform:translate(-50%,-50%) rotate(480deg);}}
+    @keyframes rotateEarth{from{transform:translate(-50%,-50%) rotate(200deg);}to{transform:translate(-50%,-50%) rotate(560deg);}}
+    @keyframes rotateMars{from{transform:translate(-50%,-50%) rotate(45deg);}to{transform:translate(-50%,-50%) rotate(405deg);}}
+    @keyframes rotateJup{from{transform:translate(-50%,-50%) rotate(280deg);}to{transform:translate(-50%,-50%) rotate(640deg);}}
+    @keyframes rotateSat{from{transform:translate(-50%,-50%) rotate(150deg);}to{transform:translate(-50%,-50%) rotate(510deg);}}
+    @keyframes rotateUranus{from{transform:translate(-50%,-50%) rotate(310deg);}to{transform:translate(-50%,-50%) rotate(670deg);}}
+    @keyframes rotateNeptune{from{transform:translate(-50%,-50%) rotate(75deg);}to{transform:translate(-50%,-50%) rotate(435deg);}}
+    @keyframes rotatePluto{from{transform:translate(-50%,-50%) rotate(190deg);}to{transform:translate(-50%,-50%) rotate(550deg);}}
+
+    @keyframes moonOrbit{from{transform:translate(20px,-6px) rotate(0deg);}to{transform:translate(20px,-6px) rotate(360deg);}}
+
+    .solar-wrap.paused .orbit{animation-play-state:paused;}
+    .solar-wrap.paused .sun{animation-play-state:paused;}
+
+    .hint{position:fixed;left:16px;bottom:16px;font-size:13px;opacity:0.8;}
+  </style>
+</head>
+<body>
+  <div class="solar-wrap" id="solar">
+    <div class="sun"></div>
+
+    <div class="orbit mercury"><div class="planet"><div class="dot"></div></div></div>
+    <div class="orbit venus"><div class="planet"><div class="dot"></div></div></div>
+    <div class="orbit earth"><div class="planet"><div class="dot"><div class="moon"></div></div></div></div>
+    <div class="orbit mars"><div class="planet"><div class="dot"></div></div></div>
+    <div class="orbit jupiter"><div class="planet"><div class="dot"></div></div></div>
+    <div class="orbit saturn"><div class="planet"><div class="dot"></div></div></div>
+    <div class="orbit uranus"><div class="planet"><div class="dot"></div></div></div>
+    <div class="orbit neptune"><div class="planet"><div class="dot"></div></div></div>
+    <div class="orbit pluto"><div class="planet"><div class="dot"></div></div></div>
+  </div>
+  <div class="hint">Click to pause/resume</div>
+  <script>
+    const wrap = document.getElementById('solar');
+    wrap.addEventListener('click',()=>wrap.classList.toggle('paused'));
+  </script>
+</body>
+</html>
+  
